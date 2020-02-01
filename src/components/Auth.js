@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Jumbotron, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap'
+import { Container, Jumbotron, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
 import classnames from 'classnames';
 
 import Login from './Login'
@@ -17,7 +17,7 @@ const Auth = props => {
         <Container>
             <div className='spacer'></div>
             <Nav tabs>
-                <NavItem className='half'>
+                <NavItem className='half center'>
                     <NavLink
                         className={classnames({ active: activeTab === '1' }, 'bg-dark')}
                         onClick={() => { toggle('1'); }}
@@ -25,7 +25,7 @@ const Auth = props => {
                         Log In
                     </NavLink>
                 </NavItem>
-                <NavItem className='half'>
+                <NavItem className='half center'>
                     <NavLink
                         className={classnames({ active: activeTab === '2' }, 'bg-dark')}
                         onClick={() => { toggle('2'); }}

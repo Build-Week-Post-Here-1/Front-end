@@ -1,19 +1,14 @@
 import React, { useState } from 'react'
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink
-} from 'reactstrap'
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap'
 
 const AuthLinks = () => {
     return (
         <Nav className='mr-auto' navbar>
             <NavItem>
               <NavLink href='/'>Home</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href='/saved'>Saved</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href='/profile'>Profile</NavLink>
@@ -31,7 +26,8 @@ const GuestLinks = () => {
         </Nav>
     )
 }
-const Navigation = (props) => {
+
+const Navigation = props => {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggle = () => setIsOpen(!isOpen)
