@@ -38,7 +38,7 @@ const Auth = props => {
                 <TabPane tabId="1">
                     <Row>
                         <Col sm="12">
-                            <Jumbotron className='bg-primary'>
+                            <Jumbotron className='orange-bg'>
                                 <Login />
                             </Jumbotron>
                         </Col>
@@ -47,7 +47,7 @@ const Auth = props => {
                 <TabPane tabId="2">
                     <Row>
                         <Col sm="12">
-                            <Jumbotron className='bg-primary'>
+                            <Jumbotron className='orange-bg'>
                                 <Signup />
                             </Jumbotron>
                         </Col>
