@@ -1,17 +1,61 @@
-import React from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { useInput } from '../hooks/useInput'
+import { apiUrl } from '../config'
 
 const Signup = props => {
+    const append = ''
+    const history = useHistory()
+    const { value:user, bind:bindUser } = useInput('')
+    const { value:pass, bind:bindPass } = useInput('')
+    const [values, updateValues] = useState({
+      user: '',
+      pass: ''
+    })
+
+    useEffect(() => {
+      updateValues({
+        user: user,
+        pass: pass
+      })
+    }, [user, pass])
+
+    const handleSubmit = e => {
+      e.preventDefault()
+      axios
+        .get(`${apiUrl}${append}`, values)
+        .then(res => {
+          console.log(res.data)
+          // We'll store the token here
+          history.push('/')
+        })
+        .catch(err => console.log(err))
+
+    }
+
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <Label for="username">User Name</Label>
-          <Input type="name" name="name" id="username" placeholder="Insert User Name" />
+          <Label for='user'>User Name</Label>
+          <Input type='text' {...bindUser}/>
         </FormGroup>
         <FormGroup>
-          <Label for="password">Password</Label>
-          <Input type="password" name="password" id="redditpw" placeholder="Type your password here" />
+          <Label for='pass'>Password</Label>
+          <Input type='password' {...bindPass} />
         </FormGroup>
+        <Button>Submit</Button>
+      </Form>
+    );
+  }
+
+
+export default Signup
+
+// Added by Gunnar without wiring or state
+
+/*
         <FormGroup>
           <Label for="Select">I am a:</Label>
           <Input type="select" name="select" id="exampleSelect">
@@ -61,10 +105,4 @@ const Signup = props => {
             I Accept the Terms and Conditions
           </Label>
         </FormGroup>
-        <Button>Submit</Button>
-      </Form>
-    );
-  }
-
-
-export default Signup
+        */
