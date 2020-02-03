@@ -34,7 +34,7 @@ const Navigation = props => {
 
   return (
     <div>
-      <Navbar color='bg-primary' dark expand='md' className='bg-primary'>
+      <Navbar color='orange-bg' dark expand='md' className='orange-bg'>
         <NavbarBrand href='/'>Post Here!</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
