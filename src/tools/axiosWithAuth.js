@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiUrl = ''
+import { apiUrl } from '../config'
 
 export const axiosWithAuth = () => {
   return axios.create({
