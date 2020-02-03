@@ -33,7 +33,6 @@ const Login = props => {
           history.push('/')
         })
         .catch(err => console.log(err))
-
     }
     return (
         <Form>

@@ -44,7 +44,7 @@ const Navigation = props => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           {
-            localStorage.getItem('token') ?
+            localStorage.getItem('jwtToken') ?
             <AuthLinks /> :
             <GuestLinks />
           }
