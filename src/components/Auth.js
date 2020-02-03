@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Container, Jumbotron, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
 import classnames from 'classnames';
 
@@ -7,10 +8,14 @@ import Signup from './Signup'
 
 const Auth = props => {
 
+    const history = useHistory()
     const [activeTab, setActiveTab] = useState('1');
-
     const toggle = tab => {
         if(activeTab !== tab) setActiveTab(tab);
+    }
+
+    if (localStorage.getItem('jwtToken')) {
+        history.push('/')
     }
 
     return (

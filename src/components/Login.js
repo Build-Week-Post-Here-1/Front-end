@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useInput } from '../hooks/useInput'
 import { apiUrl } from '../config'
 
@@ -33,10 +33,9 @@ const Login = props => {
           history.push('/')
         })
         .catch(err => console.log(err))
-
     }
     return (
-        <Form>
+        <Form onSubmit={ handleSubmit }>
         <FormGroup>
           <Label for="user">User Name</Label>
           <Input type="text" {...bindUser} />

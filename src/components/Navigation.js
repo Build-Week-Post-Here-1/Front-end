@@ -15,6 +15,9 @@ const AuthLinks = () => {
             <NavItem>
               <NavLink href='/profile'>Profile</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink href='/logout'>Log Out</NavLink>
+            </NavItem>
         </Nav>
     )
 }
@@ -44,7 +47,7 @@ const Navigation = props => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           {
-            localStorage.getItem('token') ?
+            localStorage.getItem('jwtToken') ?
             <AuthLinks /> :
             <GuestLinks />
           }
