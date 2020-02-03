@@ -15,6 +15,9 @@ const AuthLinks = () => {
             <NavItem>
               <NavLink href='/profile'>Profile</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink href='/logout'>Log Out</NavLink>
+            </NavItem>
         </Nav>
     )
 }
