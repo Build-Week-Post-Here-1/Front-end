@@ -36,7 +36,7 @@ const Signup = props => {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={ handleSubmit }>
         <FormGroup>
           <Label for='user'>User Name</Label>
           <Input type='text' {...bindUser}/>
