@@ -2,7 +2,9 @@ const initialState = {
     username: null,
     token: null,
     id: null,
-    error: null
+    error: null,
+    session: 0,
+    saved: []
 }
 
 export const reducer = (state = initialState, action) => {
@@ -22,7 +24,8 @@ export const reducer = (state = initialState, action) => {
         case 'LOGIN_ERROR':
             console.log(action.payload)
             return {
-                ...state
+                ...state,
+                error: action.payload
             }
         case 'REGISTER':
             return {
@@ -39,7 +42,42 @@ export const reducer = (state = initialState, action) => {
         case 'REGISTER_ERROR':
             console.log(action.payload)
             return {
+                ...state,
+                error: action.payload
+            }
+        case 'UNREGISTERING':
+            return {
                 ...state
+            }
+        case 'UNREGISTER_SUCCESS':
+            localStorage.clear()
+            return {
+                ...initialState
+            }
+        case 'UNREGISTER_ERROR':
+            return {
+                ...state,
+                error: action.payload
+            }
+        case 'ADD_POST':
+            return {
+                ...state,
+                session: state.session + 1
+            }
+        case 'ADD_FAIL':
+            return {
+                ...state,
+                error: action.payload
+            }
+        case 'GET_LIST':
+            return {
+                ...state,
+                saved: action.payload
+            }
+        case 'GET_FAIL':
+            return {
+                ...state,
+                error: action.payload
             }
         default:
             return state
