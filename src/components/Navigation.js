@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap'
-
-import { UserContext } from '../contexts/UserContext'
+import { connect } from 'react-redux'
 
 const AuthLinks = () => {
     return (
@@ -34,8 +33,6 @@ const GuestLinks = () => {
 
 const Navigation = props => {
   
-  const { user } = useContext(UserContext)
-
   const [isOpen, setIsOpen] = useState(false)
 
   const toggle = () => setIsOpen(!isOpen)
@@ -51,11 +48,17 @@ const Navigation = props => {
             <AuthLinks /> :
             <GuestLinks />
           }
-          <NavbarText>{ user.username === null ? null : `Welcome, ${user.username}` }</NavbarText>
+          <NavbarText>{ props.username === null ? null : `Welcome, ${props.username}` }</NavbarText>
         </Collapse>
       </Navbar>
     </div>
   )
 }
 
-export default Navigation
+const mapStateToProps = state => {
+  return {
+      username: state.username,
+  }
+}
+
+export default connect(mapStateToProps, {})(Navigation)

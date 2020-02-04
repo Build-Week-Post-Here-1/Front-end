@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Container, Jumbotron, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
 import classnames from 'classnames';
@@ -17,6 +18,12 @@ const Auth = props => {
     if (localStorage.getItem('jwtToken')) {
         history.push('/')
     }
+
+    useEffect(() => {
+        if (props.username !== null) {
+            history.push('/')
+        }
+    }, [props])
 
     return (
         <Container>
@@ -63,4 +70,10 @@ const Auth = props => {
     )
 }
 
-export default Auth
+const mapStateToProps = state => {
+    return {
+        username: state.username
+    }
+  }
+  
+  export default connect(mapStateToProps, {})(Auth)
