@@ -22,7 +22,8 @@ export const reducer = (state = initialState, action) => {
         case 'LOGIN_ERROR':
             console.log(action.payload)
             return {
-                ...state
+                ...state,
+                error: action.payload
             }
         case 'REGISTER':
             return {
@@ -39,7 +40,22 @@ export const reducer = (state = initialState, action) => {
         case 'REGISTER_ERROR':
             console.log(action.payload)
             return {
+                ...state,
+                error: action.payload
+            }
+        case 'UNREGISTERING':
+            return {
                 ...state
+            }
+        case 'UNREGISTER_SUCCESS':
+            localStorage.clear()
+            return {
+                ...initialState
+            }
+        case 'UNREGISTER_ERROR':
+            return {
+                ...state,
+                error: action.payload
             }
         default:
             return state
