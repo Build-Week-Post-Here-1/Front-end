@@ -1,42 +1,65 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useInput } from '../hooks/useInput'
 import { apiUrl } from '../config'
+import { UserContext } from '../contexts/UserContext'
 
 const Signup = props => {
-    const append = ''
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*',
+        }
+    }
+    const { updateUser } = useContext(UserContext)
+    const append = '/auth'
     const history = useHistory()
     const { value:user, bind:bindUser } = useInput('')
     const { value:pass, bind:bindPass } = useInput('')
     const [values, updateValues] = useState({
-      user: '',
-      pass: ''
+      username: '',
+      password: ''
     })
 
     useEffect(() => {
       updateValues({
-        user: user,
-        pass: pass
+        username: user,
+        password: pass
       })
     }, [user, pass])
 
-    const handleSubmit = e => {
+    const handleSignup = e => {
       e.preventDefault()
       axios
-        .get(`${apiUrl}${append}`, values)
+        .post('http://localhost:5000/api/auth/register', values, config)
         .then(res => {
           console.log(res.data)
-          // We'll store the token here
+          localStorage.setItem('jwtToken', res.data.token)
+          updateUser(res.data.user)
           history.push('/')
         })
         .catch(err => console.log(err))
-
+        
+       /*
+       axios({
+         method: 'post',
+         url: 'http://localhost:5000/api/auth/register',
+         data: {
+           username: user,
+           password: pass
+         },
+         headers: {
+          'Access-Control-Allow-Origin': '*',
+         }
+       }).then(res => console.log(res))
+       .catch(err => console.log(err))
+       */
     }
 
     return (
-        <Form onSubmit={ handleSubmit }>
+        <Form onSubmit={ handleSignup }>
         <FormGroup>
           <Label for='user'>User Name</Label>
           <Input type='text' {...bindUser}/>
