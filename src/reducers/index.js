@@ -29,9 +29,12 @@ export const reducer = (state = initialState, action) => {
                 ...state
             }
         case 'REGISTER_SUCCESS':
-            console.log(action.payload)
+            localStorage.setItem('jwtToken', action.payload.token)
             return {
-                ...state
+                ...state,
+                username: action.payload.user.username,
+                token: action.payload.token,
+                id: action.payload.user.id
             }
         case 'REGISTER_ERROR':
             console.log(action.payload)

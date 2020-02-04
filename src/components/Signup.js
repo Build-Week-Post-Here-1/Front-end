@@ -1,20 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { connect } from 'react-redux'
+import { register } from '../actions'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useInput } from '../hooks/useInput'
-import { apiUrl } from '../config'
-import { UserContext } from '../contexts/UserContext'
 
 const Signup = props => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': '*',
-        }
-    }
-    const { updateUser } = useContext(UserContext)
-    const append = '/auth'
+    
     const history = useHistory()
     const { value:user, bind:bindUser } = useInput('')
     const { value:pass, bind:bindPass } = useInput('')
@@ -32,30 +24,8 @@ const Signup = props => {
 
     const handleSignup = e => {
       e.preventDefault()
-      axios
-        .post('http://localhost:5000/api/auth/register', values, config)
-        .then(res => {
-          console.log(res.data)
-          localStorage.setItem('jwtToken', res.data.token)
-          updateUser(res.data.user)
-          history.push('/')
-        })
-        .catch(err => console.log(err))
-        
-       /*
-       axios({
-         method: 'post',
-         url: 'http://localhost:5000/api/auth/register',
-         data: {
-           username: user,
-           password: pass
-         },
-         headers: {
-          'Access-Control-Allow-Origin': '*',
-         }
-       }).then(res => console.log(res))
-       .catch(err => console.log(err))
-       */
+      props.register(values)
+      history.push('/')
     }
 
     return (
@@ -74,7 +44,12 @@ const Signup = props => {
   }
 
 
-export default Signup
+  const mapStateToProps = state => {
+    return {
+    }
+  }
+  
+  export default connect(mapStateToProps, { register })(Signup)
 
 // Added by Gunnar without wiring or state
 
