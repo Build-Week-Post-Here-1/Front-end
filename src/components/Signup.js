@@ -1,42 +1,35 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { connect } from 'react-redux'
+import { register } from '../actions'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useInput } from '../hooks/useInput'
-import { apiUrl } from '../config'
 
 const Signup = props => {
-    const append = ''
+    
     const history = useHistory()
     const { value:user, bind:bindUser } = useInput('')
     const { value:pass, bind:bindPass } = useInput('')
     const [values, updateValues] = useState({
-      user: '',
-      pass: ''
+      username: '',
+      password: ''
     })
 
     useEffect(() => {
       updateValues({
-        user: user,
-        pass: pass
+        username: user,
+        password: pass
       })
     }, [user, pass])
 
-    const handleSubmit = e => {
+    const handleSignup = e => {
       e.preventDefault()
-      axios
-        .get(`${apiUrl}${append}`, values)
-        .then(res => {
-          console.log(res.data)
-          // We'll store the token here
-          history.push('/')
-        })
-        .catch(err => console.log(err))
-
+      props.register(values)
+      history.push('/')
     }
 
     return (
-        <Form onSubmit={ handleSubmit }>
+        <Form onSubmit={ handleSignup }>
         <FormGroup>
           <Label for='user'>User Name</Label>
           <Input type='text' {...bindUser}/>
@@ -51,7 +44,12 @@ const Signup = props => {
   }
 
 
-export default Signup
+  const mapStateToProps = state => {
+    return {
+    }
+  }
+  
+  export default connect(mapStateToProps, { register })(Signup)
 
 // Added by Gunnar without wiring or state
 

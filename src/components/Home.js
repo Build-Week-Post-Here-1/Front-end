@@ -35,7 +35,7 @@ const Home = props => {
                         <Label for='search'>Search by entering the full text of your post</Label>
                         <Input type='text' {...bindSearch} />
                     </FormGroup>
-                    <Button type='submit'>Search</Button>
+                    <Button type='submit' className='orange-bg'>Search</Button>
                 </Form>
                 { posts.map(post => <Post post={ post } />) }
             </Jumbotron>

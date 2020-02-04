@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios'
 
 import { apiUrl } from '../config'
 
@@ -9,5 +9,5 @@ export const axiosWithAuth = () => {
     headers: {
       Authorization: localStorage.getItem('token')
     }
-  });
-};
+  })
+}

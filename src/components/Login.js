@@ -1,41 +1,35 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { login } from '../actions'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useInput } from '../hooks/useInput'
-import { apiUrl } from '../config'
 
 // This file wasn't so bad, aside from zero wiring
 const Login = props => {
-    const append = ''
+
     const history = useHistory()
     const { value:user, bind:bindUser } = useInput('')
     const { value:pass, bind:bindPass } = useInput('')
     const [values, updateValues] = useState({
-      user: '',
-      pass: ''
+      username: '',
+      password: ''
     })
 
     useEffect(() => {
       updateValues({
-        user: user,
-        pass: pass
+        username: user,
+        password: pass
       })
     }, [user, pass])
 
-    const handleSubmit = e => {
+    const handleLogin = e => {
       e.preventDefault()
-      axios
-        .get(`${apiUrl}${append}`, values)
-        .then(res => {
-          console.log(res.data)
-          // We'll store the token here
-          history.push('/')
-        })
-        .catch(err => console.log(err))
+      props.login(values)
+      history.push('/')
     }
     return (
-        <Form onSubmit={ handleSubmit }>
+        <Form onSubmit={ handleLogin }>
         <FormGroup>
           <Label for="user">User Name</Label>
           <Input type="text" {...bindUser} />
@@ -49,4 +43,9 @@ const Login = props => {
     )
 }
 
-export default Login
+const mapStateToProps = state => {
+  return {
+  }
+}
+
+export default connect(mapStateToProps, { login })(Login)

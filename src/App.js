@@ -13,10 +13,7 @@ import Saved from './components/Saved'
 
 function App() {
   
-  const [user, updateUser] = useState({
-    username: null,
-    token: null
-  })
+  const [user, updateUser] = useState()
 
   return (
     <div className='App'>
@@ -24,9 +21,9 @@ function App() {
         <Navigation />
         <Route exact path='/auth' component={ Auth } />
         <Route exact path='/logout' component={ Logout } />
-        <PrivateRoute path='/' component={ Home } />
-        <PrivateRoute path='/' component={ Saved } />
-        <PrivateRoute path='/profile' component={ Profile } />
+        <PrivateRoute exact path='/' component={ Home } />
+        <PrivateRoute exact path='/saved' component={ Saved } />
+        <PrivateRoute exact path='/profile' component={ Profile } />
       </UserContext.Provider>
     </div>
   );
