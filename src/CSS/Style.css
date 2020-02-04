@@ -13,3 +13,45 @@
 .orange-bg {
     background-color: #cc5500;
 }
+
+.light-mode {
+    background-color: skyblue;
+    color: #333;
+}
+
+
+input[type="checkbox"].checkbox {
+  width: 30px;
+  height: 10px;
+  background: #555;
+  position: relative;
+  border-radius: 5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  vertical-align: 2px;
+  outline: none;
+}
+
+input[type="checkbox"].checkbox:checked + label {
+  right: 35px;
+}
+
+input[type="checkbox"].checkbox:focus-visible {
+  outline: solid 2px white;
+}
+
+input[type="checkbox"].checkbox + label {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: absolute;
+  right: 45px;
+  background: #fff;
+  opacity: 0.9;
+  background-color: cyan;
+}

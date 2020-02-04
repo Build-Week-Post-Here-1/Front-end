@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap'
 import { connect } from 'react-redux'
 
@@ -37,9 +37,34 @@ const Navigation = props => {
 
   const toggle = () => setIsOpen(!isOpen)
 
+  const [lightMode, setLightMode] = useState(getInitialMode());
+  useEffect(() => {
+    localStorage.setItem('dark', JSON.stringify(lightMode));
+
+  }, [lightMode]);
+
+  function getInitialMode() {
+    const isReturningUser = "dark" in localStorage;
+    const savedMode = JSON.parse(localStorage.getItem('dark'));
+    const userPrefersDark = getPrefColorScheme();
+    if (isReturningUser) {
+      return savedMode;
+    } else if (userPrefersDark) { 
+      return true;
+    } else {
+     return false;
+   }
+   }
+   
+   function getPrefColorScheme() {
+     if (!window.matchMedia) return;
+   
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+   }
+
   return (
     <div>
-      <Navbar color='orange-bg' dark expand='md' className='orange-bg'>
+      <Navbar color='orange-bg' dark expand='md' className={lightMode ? 'light-mode' : 'orange-bg'}>
         <NavbarBrand href='/'>Post Here!</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -48,6 +73,19 @@ const Navigation = props => {
             <AuthLinks /> :
             <GuestLinks />
           }
+          <div className='toggle-container'>
+          <span>☽</span>
+<span className='toggle'>
+  <input
+  checked={lightMode}
+  onChange={() => setLightMode(prevMode => !prevMode)}
+  type="checkbox" 
+  className="checkbox" 
+  id="checkbox" />
+<label htmlFor="checkbox" />
+</span>
+<span>🌞</span>
+</div>
           <NavbarText>{ props.username === null ? null : `Welcome, ${props.username}` }</NavbarText>
         </Collapse>
       </Navbar>
