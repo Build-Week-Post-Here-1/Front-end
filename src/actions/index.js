@@ -1,6 +1,7 @@
 import axios from 'axios'
-const baseurl = 'http://localhost:5000/api'
+import { axiosWithAuth } from '../tools/axiosWithAuth'
 
+const baseurl = 'http://localhost:5000/api'
 export const login = values => {
     return dispatch => {
         dispatch({ type: 'LOGIN' })
@@ -27,14 +28,59 @@ export const register = values => {
     }
 }
 
-export const update = user => {
+export const unregister = id => {
+    return dispatch => {
+        dispatch({ type: 'UNREGISTERING' })
+        axiosWithAuth()
+        .delete(`${baseurl}/users/${id}`)
+        .then(res => {
+            dispatch({ type: 'UNREGISTER_SUCCESS', payload: res.data })
+        })
+        .catch(err => {
+            dispatch({ type: 'UNREGISTER_ERROR', payload: err })
+        })
+    }
+}
 
+export const update = values => {
+    return dispatch => {
+        axiosWithAuth()
+        .put(`${baseurl}/users/${values.id}`, values)
+        .then(res => {
+            dispatch({ type: 'UPDATE_USER', payload: res.data })
+        })
+        .catch(err => {
+            dispatch({ type: 'UPDATE_FAIL', payload: err })
+        })
+    }
+}
+
+export const add = payload => {
+    return dispatch => {
+        axiosWithAuth()
+        .post(`${baseurl}/${payload.id}/subreddits`, payload.post)
+        .then(res => {
+            dispatch({ type: 'ADD_POST', payload: res.data })
+        })
+        .catch(err => {
+            dispatch({ type: 'ADD_FAIL', payload: err })
+        })
+    }
+}
+
+export const saved = id => {
+    return dispatch => {
+        axiosWithAuth()
+        .get(`${baseurl}/${id}/subreddits`)
+        .then(res => {
+            dispatch({ type: 'GET_LIST', payload: res.data })
+        })
+        .catch(err => {
+            dispatch({ type: 'GET_FAIL', payload: err })
+        })
+    }
 }
 
 export const save = post => {
-
-}
-
-export const remove = post => {
 
 }

@@ -2,7 +2,9 @@ const initialState = {
     username: null,
     token: null,
     id: null,
-    error: null
+    error: null,
+    session: 0,
+    saved: []
 }
 
 export const reducer = (state = initialState, action) => {
@@ -53,6 +55,26 @@ export const reducer = (state = initialState, action) => {
                 ...initialState
             }
         case 'UNREGISTER_ERROR':
+            return {
+                ...state,
+                error: action.payload
+            }
+        case 'ADD_POST':
+            return {
+                ...state,
+                session: state.session + 1
+            }
+        case 'ADD_FAIL':
+            return {
+                ...state,
+                error: action.payload
+            }
+        case 'GET_LIST':
+            return {
+                ...state,
+                saved: action.payload
+            }
+        case 'GET_FAIL':
             return {
                 ...state,
                 error: action.payload
