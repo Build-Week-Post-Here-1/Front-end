@@ -14,7 +14,20 @@ const Home = props => {
     
     useEffect(() => {
         updateSearchTerm(search)
-    }, [search])
+    }, [search, props.results])
+
+    const handleSubmit = searchTerm => {
+        const object = {
+            body: searchTerm
+        }
+        props.searchAPI(object)
+        /*
+        props.searchAPI({
+            'id': props.id,
+            'name': searchTerm
+        })
+        */
+    }
 
     return (
         <Container>
@@ -25,7 +38,7 @@ const Home = props => {
                         <Label for='search'>Search by entering the full text of your post</Label>
                         <Input type='text' {...bindSearch} />
                     </FormGroup>
-                    <Button onClick={() => searchAPI(searchTerm)} className='orange-bg'>Search</Button>
+                    <Button onClick={() => handleSubmit(searchTerm)} className='orange-bg'>Search</Button>
                 </Form>
                 { props.results.map(result => <Post post={ result } />) }
             </Jumbotron>
@@ -35,7 +48,8 @@ const Home = props => {
 
 const mapStateToProps = state => {
     return {
-        results: state.results
+        results: state.results,
+        id: state.id
     }
   }
   

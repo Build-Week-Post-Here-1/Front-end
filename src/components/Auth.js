@@ -23,7 +23,7 @@ const Auth = props => {
         if (props.username !== null) {
             history.push('/')
         }
-    }, [props])
+    }, [props.username])
 
     return (
         <Container>
