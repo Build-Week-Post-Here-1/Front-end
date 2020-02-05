@@ -18,6 +18,7 @@
 
 a {
   color:white;
+  margin: 0 .3rem;
 }
 a:hover {
   text-decoration: none;
