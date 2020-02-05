@@ -7,8 +7,6 @@ export const reducer = (state, action) => {
             }
         case 'LOGIN_SUCCESS':
             localStorage.setItem('jwtToken', action.payload.token)
-            localStorage.setItem('username', action.payload.user.username)
-            localStorage.setItem('id', action.payload.user.id)
             return {
                 ...state,
                 username: action.payload.user.username,
@@ -27,8 +25,6 @@ export const reducer = (state, action) => {
             }
         case 'REGISTER_SUCCESS':
             localStorage.setItem('jwtToken', action.payload.token)
-            localStorage.setItem('username', action.payload.user.username)
-            localStorage.setItem('id', action.payload.user.id)
             return {
                 ...state,
                 username: action.payload.user.username,
@@ -83,6 +79,10 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 error: action.payload
+            }
+        case 'SEARCHING':
+            return {
+                ...state
             }
         case 'SEARCH_LIST':
             return {
