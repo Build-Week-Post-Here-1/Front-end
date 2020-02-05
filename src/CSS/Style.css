@@ -1,9 +1,11 @@
 .spacer {
     height: 5vh;
+
 }
 
 .half {
     width: 50%;
+    
 }
 
 .center {
@@ -14,7 +16,17 @@
     background-color: #cc5500;
 }
 
-.light-mode {
+a {
+  color:white;
+}
+a:hover {
+  text-decoration: none;
+  color:white;
+}
+
+
+
+/*.light-mode {
     background-color: skyblue;
     color: #333;
 }
@@ -54,4 +66,4 @@ input[type="checkbox"].checkbox + label {
   background: #fff;
   opacity: 0.9;
   background-color: cyan;
-}
+}*/
