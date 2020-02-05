@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import { useInput } from '../hooks/useInput'
 import { updateUser } from '../actions'
 import { Container, Jumbotron, Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap'
-import { axiosWithAuth } from '../tools/axiosWithAuth'
 const Profile = props => {
 
     const {
@@ -18,7 +17,8 @@ const Profile = props => {
     const { value:pass, bind:bindPass } = useInput('')
     const [values, updateValues] = useState({
       username: props.username,
-      password: ''
+      password: '',
+      id: props.id
     })
     console.log(props)
     useEffect(() => {
@@ -29,17 +29,12 @@ const Profile = props => {
     }, [user, pass])
 
     const handleUpdate = values => {
-      const baseurl = 'https://bw-post-here-1.herokuapp.com/api'
-      console.log(values)
-      axiosWithAuth()
-      .put(`${baseurl}/users/${props.id}`, values)
-        .then(res => {
-            console.log(res.data)
-            
-            updateUser(res.data)
-            history.push('/')
-        })
-      
+        const object = {
+            id: props.id,
+            values: values
+        }
+      props.updateUser(object)
+      history.push('/')
     }
 
     return (

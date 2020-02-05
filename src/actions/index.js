@@ -42,10 +42,10 @@ export const unregister = id => {
     }
 }
 
-export const updateUser = values => {
+export const updateUser = object => {
     return dispatch => {
         axiosWithAuth()
-        .put(`${baseurl}/users/${values.id}`, values)
+        .put(`${baseurl}/users/${object.id}`, object.values)
         .then(res => {
             dispatch({ type: 'UPDATE_USER', payload: res.data })
         })

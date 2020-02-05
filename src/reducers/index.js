@@ -74,9 +74,9 @@ export const reducer = (state, action) => {
                 error: action.payload
             }
         case 'UPDATE_USER':
-            console.log(action.payload)
             return {
                 ...state,
+                username: action.payload.username,
                 
             }
         case 'UPDATE_FAIL':
