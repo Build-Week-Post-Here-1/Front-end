@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useInput } from '../hooks/useInput'
 
-// This file wasn't so bad, aside from zero wiring
+
 const Login = props => {
 
     const history = useHistory()
