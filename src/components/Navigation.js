@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap'
 import { connect } from 'react-redux'
-
+import { Link } from 'react-router-dom'
 const AuthLinks = () => {
     return (
         <Nav className='mr-auto' navbar>
             <NavItem>
-              <NavLink href='/'>Home</NavLink>
+              <Link to='/'>Home</Link>
             </NavItem>
             <NavItem>
-              <NavLink href='/saved'>Saved</NavLink>
+              <Link to='/saved'>Saved</Link>
             </NavItem>
             <NavItem>
-              <NavLink href='/profile'>Profile</NavLink>
+              <Link to='/profile'>Profile</Link>
             </NavItem>
             <NavItem>
-              <NavLink href='/logout'>Log Out</NavLink>
+              <Link to='/logout'>Log Out</Link>
             </NavItem>
         </Nav>
     )
@@ -25,7 +25,7 @@ const GuestLinks = () => {
     return (
         <Nav className='mr-auto' navbar>
             <NavItem>
-              <NavLink href='/login'>Login / Sign Up</NavLink>
+              <Link to='/login'>Login / Sign Up</Link>
             </NavItem>
         </Nav>
     )
@@ -37,35 +37,35 @@ const Navigation = props => {
 
   const toggle = () => setIsOpen(!isOpen)
 
-  const [lightMode, setLightMode] = useState(getInitialMode());
-  useEffect(() => {
-    localStorage.setItem('dark', JSON.stringify(lightMode));
+  //const [lightMode, setLightMode] = useState(getInitialMode());
+  //useEffect(() => {
+  //  localStorage.setItem('dark', JSON.stringify(lightMode));
+  //
+  //}, [lightMode]);
 
-  }, [lightMode]);
-
-  function getInitialMode() {
-    const isReturningUser = "dark" in localStorage;
-    const savedMode = JSON.parse(localStorage.getItem('dark'));
-    const userPrefersDark = getPrefColorScheme();
-    if (isReturningUser) {
-      return savedMode;
-    } else if (userPrefersDark) { 
-      return true;
-    } else {
-     return false;
-   }
-   }
+  //function getInitialMode() {
+    //const isReturningUser = "dark" in localStorage;
+    //const savedMode = JSON.parse(localStorage.getItem('dark'));
+    //const userPrefersDark = getPrefColorScheme();
+    //if (isReturningUser) {
+    //  return savedMode;
+    //} else if (userPrefersDark) { 
+    //  return true;
+    //} else {
+    // return false;
+   //}
+   //}
    
-   function getPrefColorScheme() {
-     if (!window.matchMedia) return;
+   //function getPrefColorScheme() {
+    // if (!window.matchMedia) return;
    
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-   }
+    //return window.matchMedia("(prefers-color-scheme: dark)").matches;
+   //}
 
   return (
     <div>
-      <Navbar color='orange-bg' dark expand='md' className={lightMode ? 'light-mode' : 'orange-bg'}>
-        <NavbarBrand href='/'>Post Here!</NavbarBrand>
+      <Navbar color='orange-bg' dark expand='md' className='orange-bg'>
+        <NavbarBrand><Link to='/'>Post Here!</Link></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           {
@@ -73,19 +73,9 @@ const Navigation = props => {
             <AuthLinks /> :
             <GuestLinks />
           }
-          <div className='toggle-container'>
-          <span>☽</span>
-<span className='toggle'>
-  <input
-  checked={lightMode}
-  onChange={() => setLightMode(prevMode => !prevMode)}
-  type="checkbox" 
-  className="checkbox" 
-  id="checkbox" />
-<label htmlFor="checkbox" />
-</span>
-<span>🌞</span>
-</div>
+          
+
+
           <NavbarText>{ props.username === null ? null : `Welcome, ${props.username}` }</NavbarText>
         </Collapse>
       </Navbar>
@@ -100,3 +90,19 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {})(Navigation)
+
+/*
+<div className='toggle-container'>
+          <span>☽</span>
+<span className='toggle'>
+  <input
+  checked={lightMode}
+  onChange={() => setLightMode(prevMode => !prevMode)}
+  type="checkbox" 
+  className="checkbox" 
+  id="checkbox" />
+<label htmlFor="checkbox" />
+</span>
+<span>🌞</span>
+</div>
+*/

@@ -7,7 +7,7 @@ export const axiosWithAuth = () => {
     // config object
     baseURL: apiUrl,
     headers: {
-      Authorization: localStorage.getItem('token')
+      Authorization: localStorage.getItem('jwtToken')
     }
   })
 }

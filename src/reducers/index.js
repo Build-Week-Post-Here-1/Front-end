@@ -1,13 +1,5 @@
-const initialState = {
-    username: null,
-    token: null,
-    id: null,
-    error: null,
-    session: 0,
-    saved: []
-}
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state, action) => {
     switch (action.type) {
         case 'LOGIN':
             return {
@@ -15,6 +7,8 @@ export const reducer = (state = initialState, action) => {
             }
         case 'LOGIN_SUCCESS':
             localStorage.setItem('jwtToken', action.payload.token)
+            localStorage.setItem('username', action.payload.user.username)
+            localStorage.setItem('id', action.payload.user.id)
             return {
                 ...state,
                 username: action.payload.user.username,
@@ -33,6 +27,8 @@ export const reducer = (state = initialState, action) => {
             }
         case 'REGISTER_SUCCESS':
             localStorage.setItem('jwtToken', action.payload.token)
+            localStorage.setItem('username', action.payload.user.username)
+            localStorage.setItem('id', action.payload.user.id)
             return {
                 ...state,
                 username: action.payload.user.username,
@@ -51,9 +47,7 @@ export const reducer = (state = initialState, action) => {
             }
         case 'UNREGISTER_SUCCESS':
             localStorage.clear()
-            return {
-                ...initialState
-            }
+            return 
         case 'UNREGISTER_ERROR':
             return {
                 ...state,
@@ -75,6 +69,17 @@ export const reducer = (state = initialState, action) => {
                 saved: action.payload
             }
         case 'GET_FAIL':
+            return {
+                ...state,
+                error: action.payload
+            }
+        case 'UPDATE_USER':
+            console.log(action.payload)
+            return {
+                ...state,
+                
+            }
+        case 'UPDATE_FAIL':
             return {
                 ...state,
                 error: action.payload

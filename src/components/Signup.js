@@ -32,11 +32,11 @@ const Signup = props => {
       <Form onSubmit={ handleSignup }>
       <FormGroup>
         <Label for='user'>User Name</Label>
-        <Input type='text' minLength='3' maxLength='20' required='true' {...bindUser}/>
+        <Input type='text' minLength='3' maxLength='20' required={true} {...bindUser}/>
       </FormGroup>
       <FormGroup>
         <Label for='pass'>Password</Label>
-        <Input type='password' minLength='4' required='true' {...bindPass} />
+        <Input type='password' minLength='4' required={true} {...bindPass} />
       </FormGroup>
       <Button>Submit</Button>
     </Form>

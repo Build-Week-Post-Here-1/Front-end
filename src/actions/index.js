@@ -42,7 +42,7 @@ export const unregister = id => {
     }
 }
 
-export const update = values => {
+export const updateUser = values => {
     return dispatch => {
         axiosWithAuth()
         .put(`${baseurl}/users/${values.id}`, values)

@@ -10,7 +10,16 @@ import App from './App';
 import 'bootswatch/dist/superhero/bootstrap.min.css'
 import './CSS/Style.css'
 
-const store = createStore(reducer, applyMiddleware(thunk, logger))
+const initialState = {
+    username: null,
+    token: null,
+    id: null,
+    error: null,
+    session: 0,
+    saved: []
+}
+
+const store = createStore(reducer, initialState, applyMiddleware(thunk, logger))
 ReactDOM.render(<Provider store={ store }><Router><App /></Router></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
