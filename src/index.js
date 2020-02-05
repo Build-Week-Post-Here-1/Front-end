@@ -16,7 +16,8 @@ const initialState = {
     id: null,
     error: null,
     session: 0,
-    saved: []
+    saved: [],
+    results: []
 }
 
 const store = createStore(reducer, initialState, applyMiddleware(thunk, logger))

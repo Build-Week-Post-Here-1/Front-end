@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Jumbotron, Form, FormGroup, Label, Input, Button } from 'reactstrap'
 import { useInput } from '../hooks/useInput'
-import { searchUrl } from '../config'
-import axios from 'axios'
+import { connect } from 'react-redux'
+import { searchAPI } from '../actions'
 
 import Post from './Post'
 
 const Home = props => {
 
     const [searchTerm, updateSearchTerm] = useState('')
-    const [posts, updatePosts] = useState([])
 
     const { value:search, bind:bindSearch } = useInput('')
     
@@ -17,30 +16,27 @@ const Home = props => {
         updateSearchTerm(search)
     }, [search])
 
-    const handleSubmit = e => {
-        e.preventDefault()
-        axios
-        .get(searchUrl, searchTerm)
-        .then(res => {
-            updatePosts(res.data)
-        })
-        .catch(err => console.log(err))
-    }
     return (
         <Container>
             <div className='spacer'></div>
             <Jumbotron>
-                <Form onSubmit={ handleSubmit }>
+                <Form>
                     <FormGroup>
                         <Label for='search'>Search by entering the full text of your post</Label>
                         <Input type='text' {...bindSearch} />
                     </FormGroup>
-                    <Button type='submit' className='orange-bg'>Search</Button>
+                    <Button onClick={() => searchAPI(searchTerm)} className='orange-bg'>Search</Button>
                 </Form>
-                { posts.map(post => <Post post={ post } />) }
+                { props.results.map(result => <Post post={ result } />) }
             </Jumbotron>
         </Container>
     )
 }
 
-export default Home
+const mapStateToProps = state => {
+    return {
+        results: state.results
+    }
+  }
+  
+  export default connect(mapStateToProps, { searchAPI })(Home)
