@@ -84,3 +84,15 @@ export const saved = id => {
 export const save = post => {
 
 }
+
+export const searchAPI = content => {
+    return dispatch => {
+        axios.post('https://reddit-post-here-1.herokuapp.com/', content)
+        .then(res => {
+            dispatch({ type: 'SEARCH_LIST', payload: res.data })
+        })
+        .catch(err => {
+            dispatch({ type: 'SEARCH_FAIL', payload: err })
+        })
+    }
+}

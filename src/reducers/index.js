@@ -84,6 +84,16 @@ export const reducer = (state, action) => {
                 ...state,
                 error: action.payload
             }
+        case 'SEARCH_LIST':
+            return {
+                ...state,
+                results: action.payload
+            }
+        case 'SEARCH_FAIL':
+            return {
+                ...state,
+                error: action.payload
+            }
         default:
             return state
     }
