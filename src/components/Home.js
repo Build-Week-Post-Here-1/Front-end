@@ -17,10 +17,7 @@ const Home = props => {
     }, [search, props.results])
 
     const handleSubmit = searchTerm => {
-        const object = {
-            body: searchTerm
-        }
-        props.searchAPI(object)
+        props.searchAPI(searchTerm)
         /*
         props.searchAPI({
             'id': props.id,
