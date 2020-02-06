@@ -17,7 +17,8 @@ const initialState = {
     error: null,
     session: 0,
     saved: [],
-    results: []
+    results: [],
+    smurfs: []
 }
 
 const store = createStore(reducer, initialState, applyMiddleware(thunk, logger))

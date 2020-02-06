@@ -95,6 +95,46 @@ export const reducer = (state, action) => {
                 ...state,
                 error: action.payload
             }
+        case 'ADD_SMURF':
+            return {
+                ...state,
+                smurfs: action.payload
+            }
+        case 'ADD_SMURF_FAIL':
+            return {
+                ...state,
+                error: action.payload
+            }
+        case 'GET_SMURFS': 
+            return {
+                ...state,
+                smurfs: action.payload
+            }
+        case 'GET_SMURFS_FAIL':
+            return {
+                ...state,
+                error: action.payload
+            }
+        case 'UPDATE_SMURF':
+            return {
+                ...state,
+                smurfs: action.payload
+            }
+        case 'UPDATE_SMURF_FAIL':
+            return {
+                ...state,
+                error: action.payload
+            }
+        case 'DELETE_SMURF':
+            return {
+                ...state,
+                smurfs: action.payload
+            }
+        case 'DELETE_SMURF_FAIL':
+            return {
+                ...state,
+                error: action.payload
+            }
         default:
             return state
     }
