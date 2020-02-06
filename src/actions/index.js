@@ -70,7 +70,7 @@ export const add = payload => {
 
 export const addSmurf = smurf => {
     return dispatch => {
-        axios.post('localhost:3333/smurfs', smurf)
+        axios.post('http://localhost:3333/smurfs', smurf)
         .then(res => {
             dispatch({ type: 'ADD_SMURF', payload: res.data })
         })
@@ -82,7 +82,7 @@ export const addSmurf = smurf => {
 
 export const getSmurfs = () => {
     return dispatch => {
-        axios.get('localhost:3333/smurfs')
+        axios.get('http://localhost:3333/smurfs')
         .then(res => {
             dispatch({ type: 'GET_SMURFS', payload: res.data })
         })
@@ -94,7 +94,7 @@ export const getSmurfs = () => {
 
 export const updateSmurfs = smurf => {
     return dispatch => {
-        axios.put(`localhost:3333/smurfs/${smurf.id}`)
+        axios.put(`http://localhost:3333/smurfs/${smurf.id}`)
         .then(res => {
             dispatch({ type: 'UPDATE_SMURF', payload: res.data })
         })
@@ -106,7 +106,7 @@ export const updateSmurfs = smurf => {
 
 export const deleteSmurf = smurf => {
     return dispatch => {
-        axios.delete(`localhost:3333/smurfs/${smurf.id}`)
+        axios.delete(`http://localhost:3333/smurfs/${smurf.id}`)
         .then(res => {
             dispatch({ type: 'DELETE_SMURF', payload: res.data })
         })
