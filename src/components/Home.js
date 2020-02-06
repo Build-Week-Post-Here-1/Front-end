@@ -21,8 +21,8 @@ const Home = props => {
             id: props.id,
             name: searchTerm
         }
-        //props.add(object)
-        props.searchAPI(searchTerm)
+        props.add(object)
+        //props.searchAPI(searchTerm)
     }
 
     return (
