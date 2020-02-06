@@ -58,7 +58,7 @@ export const updateUser = object => {
 export const add = payload => {
     return dispatch => {
         axiosWithAuth()
-        .post(`${baseurl}/${payload.id}/subreddits`, payload.post)
+        .post(`${baseurl}/users/${payload.id}/subreddits`, payload.name)
         .then(res => {
             dispatch({ type: 'ADD_POST', payload: res.data })
         })
@@ -89,12 +89,13 @@ export const searchAPI = content => {
         
         axios({
             method: 'post',
-            url: 'https://reddit-post-here-1.herokuapp.com/predict',
+            //url: 'https://reddit-post-here-1.herokuapp.com/predict',
+            url: 'https://stark-lowlands-53850.herokuapp.com/test',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'application/javascript'
             },
-            body: {
-                body: content
+            data: {
+                name: content
             }
         })
         
@@ -111,3 +112,4 @@ export const searchAPI = content => {
 export const save = post => {
 
 }
+

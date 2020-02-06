@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Jumbotron, Form, FormGroup, Label, Input, Button } from 'reactstrap'
 import { useInput } from '../hooks/useInput'
 import { connect } from 'react-redux'
-import { searchAPI } from '../actions'
+import { searchAPI, add } from '../actions'
 
 import Post from './Post'
 
@@ -17,13 +17,12 @@ const Home = props => {
     }, [search, props.results])
 
     const handleSubmit = searchTerm => {
+        const object = {
+            id: props.id,
+            name: searchTerm
+        }
+        //props.add(object)
         props.searchAPI(searchTerm)
-        /*
-        props.searchAPI({
-            'id': props.id,
-            'name': searchTerm
-        })
-        */
     }
 
     return (
@@ -50,4 +49,4 @@ const mapStateToProps = state => {
     }
   }
   
-  export default connect(mapStateToProps, { searchAPI })(Home)
+  export default connect(mapStateToProps, { searchAPI, add })(Home)
