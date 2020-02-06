@@ -15,16 +15,18 @@ const Auth = props => {
         if(activeTab !== tab) setActiveTab(tab);
     }
 
-    if (localStorage.getItem('jwtToken')) {
-        history.push('/')
-    }
-
+    
     useEffect(() => {
+        /*
         if (props.username !== null) {
             history.push('/')
         }
-    }, [props.username])
-
+        */
+       if (localStorage.getItem('jwtToken')) {
+        history.push('/')
+        }
+    }, [props])
+    
     return (
         <Container>
             <div className='spacer'></div>

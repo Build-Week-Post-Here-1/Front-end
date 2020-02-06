@@ -52,6 +52,7 @@ export const reducer = (state, action) => {
         case 'ADD_POST':
             return {
                 ...state,
+                results: [...state.session.results, action.payload],
                 session: state.session + 1
             }
         case 'ADD_FAIL':
