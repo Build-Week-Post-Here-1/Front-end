@@ -4,30 +4,31 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 const AuthLinks = () => {
     return (
-        <Nav className='mr-auto' navbar>
-            <NavItem>
-              <Link to='/'>Home</Link>
-            </NavItem>
-            <NavItem>
-              <Link to='/saved'>Saved</Link>
-            </NavItem>
-            <NavItem>
-              <Link to='/profile'>Profile</Link>
-            </NavItem>
-            <NavItem>
-              <Link to='/logout'>Log Out</Link>
-            </NavItem>
-        </Nav>
+        <NavbarText>
+            
+              <Link to='/'>HOME</Link>
+            
+            
+              <Link to='/saved'>SAVED</Link>
+            
+            
+              <Link to='/profile'>PROFILE</Link>
+            
+            
+              <Link to='/logout'>LOG OUT</Link>
+            
+            </NavbarText>
+
     )
 }
 
 const GuestLinks = () => {
     return (
-        <Nav className='mr-auto' navbar>
-            <NavItem>
-              <Link to='/login'>Login / Sign Up</Link>
-            </NavItem>
-        </Nav>
+        <NavbarText>
+            
+              <Link to='/auth'>LOGIN / SIGNUP</Link>
+            
+        </NavbarText>
     )
 }
 
@@ -65,9 +66,14 @@ const Navigation = props => {
   return (
     <div>
       <Navbar color='orange-bg' dark expand='md' className='orange-bg'>
-        <NavbarBrand><Link to='/'>Post Here!</Link></NavbarBrand>
+        <NavbarBrand><Link to='/'>Preddict</Link></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
+        <Nav className='mr-auto' navbar>
+          <NavItem>
+            <Link to='/profile'>{ props.username === null ? null : `Welcome, ${props.username}` }</Link>
+          </NavItem>
+        </Nav>
           {
             localStorage.getItem('jwtToken') ?
             <AuthLinks /> :
@@ -76,7 +82,7 @@ const Navigation = props => {
           
 
 
-          <NavbarText>{ props.username === null ? null : `Welcome, ${props.username}` }</NavbarText>
+          
         </Collapse>
       </Navbar>
     </div>
@@ -105,4 +111,7 @@ export default connect(mapStateToProps, {})(Navigation)
 </span>
 <span>🌞</span>
 </div>
+
+<NavbarText></NavbarText>
 */
+
