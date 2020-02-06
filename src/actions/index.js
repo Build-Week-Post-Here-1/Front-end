@@ -84,8 +84,20 @@ export const saved = id => {
 export const searchAPI = content => {
     return dispatch => {
         dispatch({type: 'SEARCHING'})
-        axios.post('https://reddit-post-here-1.herokuapp.com/predict', content)
+        //axios.post('https://reddit-post-here-1.herokuapp.com/predict', content)
         //axiosWithAuth().post(`${baseurl}/api/users/${content.id}/subreddits`, content.name)
+        
+        axios({
+            method: 'post',
+            url: 'https://reddit-post-here-1.herokuapp.com/predict',
+            headers: {
+                'Content-Type': 'text/plain'
+            },
+            body: {
+                body: content
+            }
+        })
+        
         .then(res => {
             console.log(res)
             dispatch({ type: 'SEARCH_LIST', payload: res.data })
